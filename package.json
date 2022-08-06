@@ -1,15 +1,16 @@
 {
     "name": "devconnector",
     "version": "1.0.0",
-    "main": "server.js",
+    "main": "src/server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node server.js",
-        "dev": "ls *.js | entr -r node server.js"
+        "start": "node src/server.js",
+        "dev": "fd . src | entr -r node src/server.js"
     },
     "author": "Dhruv Sharma",
     "license": "MIT",
     "dependencies": {
+        "axios": "^0.27.2",
         "bcryptjs": "^2.4.3",
         "config": "^3.3.7",
         "express": "^4.18.1",
@@ -20,7 +21,9 @@
         "request": "^2.88.2"
     },
     "devDependencies": {
-        "concurrently": "^7.3.0"
+        "concurrently": "^7.3.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "prettier": "^2.7.1"
     },
     "engines": {
         "node": "18.x"

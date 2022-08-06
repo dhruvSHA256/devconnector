@@ -9,15 +9,15 @@ if (!JWT_TOKEN) {
 module.exports = (req, res, next) => {
     const token = req.header('x-auth-token');
     if (!token) {
-        return res.status(401).json({ msg: "Authorization denied" });
+        return res.status(401).json({ msg: 'Authorization denied' });
     }
 
     try {
-        const decoded = jwt.verify(token, JWT_TOKEN)
+        const decoded = jwt.verify(token, JWT_TOKEN);
         req.user = decoded.user;
     } catch (err) {
         res.status(401).json({ msg: 'Invalid Token' });
     }
 
     next();
-}
+};

@@ -5,7 +5,7 @@ const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_SECRET = process.env.GITHUB_SECRET;
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 
 if (!GITHUB_CLIENT_ID) {
@@ -15,7 +15,7 @@ if (!GITHUB_CLIENT_ID) {
     process.exit(1);
 }
 
-if (!GITHUB_TOKEN) {
+if (!GITHUB_SECRET) {
     console.error(
         '[error]: The "GITHUB_TOKEN" environment variable is required',
     );
@@ -28,7 +28,7 @@ if (!GITHUB_TOKEN) {
 router.get('/github/:username', async (req, res) => {
     try {
         const uri = encodeURI(
-            `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_TOKEN}`,
+            `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_SECRET}`,
         );
         const gitHubResponse = await axios.get(uri);
         return res.json(gitHubResponse.data);
