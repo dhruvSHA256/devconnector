@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/react,javascript,typescript,node,npm,vim,direnv
 # Edit at https://www.toptal.com/developers/gitignore?templates=react,javascript,typescript,node,npm,vim,direnv
 
+docs/_api.org
+
 .eslintrc.json
 .prettierrc
 
