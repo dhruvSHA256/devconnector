@@ -34,7 +34,9 @@ router.get('/github/:username', async (req, res) => {
         return res.json(gitHubResponse.data);
     } catch (err) {
         console.error(err.message);
-        return res.status(404).json({ msg: 'No Github profile found' });
+        return res
+            .status(404)
+            .json({ errors: [{ msg: 'No Github profile found' }] });
     }
 });
 
@@ -141,7 +143,7 @@ router.delete('/', auth, async (req, res) => {
     try {
         await Profile.findOneAndDelete({ user: req.user.id });
         await User.findOneAndDelete({ _id: req.user.id });
-        res.json({ msg: 'User deleted' });
+        res.json({ errors: [{ msg: 'User deleted' }] });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Internal Server Error');
@@ -157,13 +159,17 @@ router.get('/user/:user_id', async (req, res) => {
             user: req.params.user_id,
         }).populate('user', ['name', 'avatar']);
         if (!profile)
-            return res.status(400).json({ msg: 'No profile for user' });
+            return res
+                .status(400)
+                .json({ errors: [{ msg: 'No profile for user' }] });
 
         res.json(profile);
     } catch (err) {
         console.error(err.message);
         if (err.kind === 'ObjectId')
-            return res.status(400).json({ msg: 'No profile for user' });
+            return res
+                .status(400)
+                .json({ errors: [{ msg: 'No profile for user' }] });
         res.status(500).send('Internal Server Error');
     }
 });
@@ -207,15 +213,14 @@ router.get('/me', auth, async (req, res) => {
 router.post(
     '/',
     auth,
-    check('status', 'Status is required').not().isEmpty(),
-    check('skills', 'Skills are required').not().isEmpty(),
+    check('status', 'Status is required').notEmpty(),
+    check('skills', 'Skills are required').notEmpty(),
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
         // create profile and return success msg
-        // res.json({ "msg": "lksfj hi" });
         const {
             website,
             skills,
@@ -264,7 +269,7 @@ router.post(
             return res.json(profile);
         } catch (err) {
             console.error(err.message);
-            return res.status(500).send('Server Error');
+            return res.status(500).send('Internal Server Error');
         }
     },
 );

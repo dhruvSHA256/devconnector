@@ -17,7 +17,7 @@ if (!JWT_TOKEN) {
 //@access   Public
 router.post(
     '/',
-    check('name', 'Name is required').not().isEmpty(),
+    check('name', 'Name is required').notEmpty(),
     check('email', 'Please give a valid email').isEmail(),
     check('password', 'Length must be > 6').isLength({ min: 6 }),
     async (req, res) => {
@@ -68,18 +68,16 @@ router.post(
                     if (err) {
                         throw err;
                     } else {
-                        return res
-                            .status(200)
-                            .json({
-                                success: { msg: 'User Registered' },
-                                token,
-                            });
+                        return res.status(200).json({
+                            success: { msg: 'User Registered' },
+                            token,
+                        });
                     }
                 },
             );
         } catch (err) {
             console.error(err.message);
-            return res.status(500).send('Server Error');
+            return res.status(500).send('Internal Server Error');
         }
     },
 );
