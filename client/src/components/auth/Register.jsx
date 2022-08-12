@@ -1,8 +1,11 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setAlert } from "../../actions/alert";
+import PropTypes from 'prop-types';
 // import axios from 'axios';
 
-const Register = () => {
+const Register = ({ setAlert }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -15,10 +18,10 @@ const Register = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (password !== password2) {
-            console.log("passwo nt match")
+            setAlert('password do not match', 'danger');
             // setAlert('Passwords do not match', 'danger');
         } else {
-            console.log("success");
+            console.log('success');
             // const newUser = { name, email, password };
             // try {
             //     const res = await axios.post("/api/users", newUser);
@@ -28,10 +31,9 @@ const Register = () => {
             // }
             // register({ name, email, password });
         }
-    }
+    };
     return (
-        <Fragment>
-            <section className='container'>
+        <section className="container">
             <h1 className="large text-primary">Sign Up</h1>
             <p className="lead">
                 <i className="fas fa-user"></i> Create Your Account
@@ -56,8 +58,8 @@ const Register = () => {
                         onChange={(e) => onChange(e)}
                     />
                     <small className="form-text">
-                        This site uses Gravatar so if you want a profile image,
-                        use a Gravatar email
+                        This site uses Gravatar so if you want a profile
+                        image, use a Gravatar email
                     </small>
                 </div>
                 <div className="form-group">
@@ -89,9 +91,11 @@ const Register = () => {
             <p className="my-1">
                 Already have an account? <Link to="/login">Sign In</Link>
             </p>
-            </section>
-        </Fragment>
+        </section>
     );
 };
 
-export default Register;
+Register.propTypes = {
+    setAlert: PropTypes.func.isRequired,
+}
+export default connect(null, { setAlert })(Register);

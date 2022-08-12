@@ -15,52 +15,52 @@ const Login = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-            console.log("success");
-            // const newUser = { name, email, password };
-            // try {
-            //     const res = await axios.post("/api/users", newUser);
-            //     console.log(res.data);
-            // } catch (err) {
-            //     console.error(err);
-            // }
-            // register({ name, email, password });
-    }
+        console.log('success');
+        // const newUser = { name, email, password };
+        // try {
+        //     const res = await axios.post("/api/users", newUser);
+        //     console.log(res.data);
+        // } catch (err) {
+        //     console.error(err);
+        // }
+        // register({ name, email, password });
+    };
     return (
         <Fragment>
-            <section className='container'>
-            <h1 className="large text-primary">Sign in</h1>
-            <p className="lead">
-                <i className="fas fa-user"></i> Signin to your account
-            </p>
-            <form className="form" onSubmit={(e) => onSubmit(e)}>
-                <div className="form-group">
+            <section className="container">
+                <h1 className="large text-primary">Sign in</h1>
+                <p className="lead">
+                    <i className="fas fa-user"></i> Signin to your account
+                </p>
+                <form className="form" onSubmit={(e) => onSubmit(e)}>
+                    <div className="form-group">
+                        <input
+                            type="email"
+                            placeholder="Email Address"
+                            name="email"
+                            value={email}
+                            onChange={(e) => onChange(e)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            minLength="6"
+                            value={password}
+                            onChange={(e) => onChange(e)}
+                        />
+                    </div>
                     <input
-                        type="email"
-                        placeholder="Email Address"
-                        name="email"
-                        value={email}
-                        onChange={(e) => onChange(e)}
+                        type="submit"
+                        className="btn btn-primary"
+                        value="Register"
                     />
-                </div>
-                <div className="form-group">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        minLength="6"
-                        value={password}
-                        onChange={(e) => onChange(e)}
-                    />
-                </div>
-                <input
-                    type="submit"
-                    className="btn btn-primary"
-                    value="Register"
-                />
-            </form>
-            <p className="my-1">
-                 New to devconnector ? <Link to="/register">Register</Link>
-            </p>
+                </form>
+                <p className="my-1">
+                    New to devconnector ? <Link to="/register">Register</Link>
+                </p>
             </section>
         </Fragment>
     );
