@@ -5,6 +5,7 @@ const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 const GITHUB_SECRET = process.env.GITHUB_SECRET;
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 
@@ -141,7 +142,11 @@ router.put(
 //@access private
 router.delete('/', auth, async (req, res) => {
     try {
+        // delete all posts from user
+        await Post.deleteMany({ user: req.user.id });
+        // delete profile 
         await Profile.findOneAndDelete({ user: req.user.id });
+        // delete user
         await User.findOneAndDelete({ _id: req.user.id });
         res.json({ errors: [{ msg: 'User deleted' }] });
     } catch (err) {

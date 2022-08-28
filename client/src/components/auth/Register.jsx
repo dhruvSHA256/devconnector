@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setAlert } from "../../actions/alert";
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 // import axios from 'axios';
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -19,19 +20,16 @@ const Register = ({ setAlert }) => {
         e.preventDefault();
         if (password !== password2) {
             setAlert('password do not match', 'danger');
-            // setAlert('Passwords do not match', 'danger');
         } else {
-            console.log('success');
-            // const newUser = { name, email, password };
-            // try {
-            //     const res = await axios.post("/api/users", newUser);
-            //     console.log(res.data);
-            // } catch (err) {
-            //     console.error(err);
-            // }
-            // register({ name, email, password });
+            register({ name, email, password });
         }
     };
+
+    // redirect to dashboard if already loggedin
+    if (isAuthenticated) {
+        return <Navigate to="/dashboard" />;
+    }
+
     return (
         <section className="container">
             <h1 className="large text-primary">Sign Up</h1>
@@ -58,8 +56,8 @@ const Register = ({ setAlert }) => {
                         onChange={(e) => onChange(e)}
                     />
                     <small className="form-text">
-                        This site uses Gravatar so if you want a profile
-                        image, use a Gravatar email
+                        This site uses Gravatar so if you want a profile image,
+                        use a Gravatar email
                     </small>
                 </div>
                 <div className="form-group">
@@ -97,5 +95,11 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
-}
-export default connect(null, { setAlert })(Register);
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+});
+export default connect(mapStateToProps, { setAlert, register })(Register);
