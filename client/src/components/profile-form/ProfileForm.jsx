@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Link, useMatch, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -16,13 +16,13 @@ const initialState = {
     facebook: '',
     linkedin: '',
     youtube: '',
-    instagram: ''
+    instagram: '',
 };
 
 const ProfileForm = ({
     profile: { profile, loading },
     createProfile,
-    getCurrentProfile
+    getCurrentProfile,
 }) => {
     const [formData, setFormData] = useState(initialState);
 
@@ -61,7 +61,7 @@ const ProfileForm = ({
         facebook,
         linkedin,
         youtube,
-        instagram
+        instagram,
     } = formData;
 
     const onChange = (e) =>
@@ -89,11 +89,19 @@ const ProfileForm = ({
                     <select name="status" value={status} onChange={onChange}>
                         <option>* Select Professional Status</option>
                         <option value="Developer">Developer</option>
-                        <option value="Junior Developer">Junior Developer</option>
-                        <option value="Senior Developer">Senior Developer</option>
+                        <option value="Junior Developer">
+                            Junior Developer
+                        </option>
+                        <option value="Senior Developer">
+                            Senior Developer
+                        </option>
                         <option value="Manager">Manager</option>
-                        <option value="Student or Learning">Student or Learning</option>
-                        <option value="Instructor">Instructor or Teacher</option>
+                        <option value="Student or Learning">
+                            Student or Learning
+                        </option>
+                        <option value="Instructor">
+                            Instructor or Teacher
+                        </option>
                         <option value="Intern">Intern</option>
                         <option value="Other">Other</option>
                     </select>
@@ -146,7 +154,8 @@ const ProfileForm = ({
                         onChange={onChange}
                     />
                     <small className="form-text">
-                        Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
+                        Please use comma separated values (eg.
+                        HTML,CSS,JavaScript,PHP)
                     </small>
                 </div>
                 <div className="form-group">
@@ -158,8 +167,8 @@ const ProfileForm = ({
                         onChange={onChange}
                     />
                     <small className="form-text">
-                        If you want your latest repos and a Github link, include your
-                        username
+                        If you want your latest repos and a Github link, include
+                        your username
                     </small>
                 </div>
                 <div className="form-group">
@@ -169,7 +178,9 @@ const ProfileForm = ({
                         value={bio}
                         onChange={onChange}
                     />
-                    <small className="form-text">Tell us a little about yourself</small>
+                    <small className="form-text">
+                        Tell us a little about yourself
+                    </small>
                 </div>
 
                 <div className="my-2">
@@ -254,13 +265,13 @@ const ProfileForm = ({
 ProfileForm.propTypes = {
     createProfile: PropTypes.func.isRequired,
     getCurrentProfile: PropTypes.func.isRequired,
-    profile: PropTypes.object.isRequired
+    profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-    profile: state.profile
+    profile: state.profile,
 });
 
 export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
-    ProfileForm
+    ProfileForm,
 );

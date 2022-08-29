@@ -1,4 +1,3 @@
-import React from 'react';
 import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -6,9 +5,7 @@ import { connect } from 'react-redux';
 const PrivateRoute = ({
     component: Component,
     auth: { isAuthenticated, loading },
-}) => (
-    isAuthenticated ? <Component /> : <Navigate to="/login" />
-)
+}) => (isAuthenticated ? <Component /> : <Navigate to="/login" />);
 
 PrivateRoute.propTypes = {
     auth: PropTypes.object.isRequired,

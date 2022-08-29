@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
-const Navbar = ({ logout, auth: { isAuthenticated, loading } }) => {
+const Navbar = ({ logout, auth: { isAuthenticated } }) => {
     const guestLinks = (
         <ul>
             <li>
@@ -18,7 +18,6 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading } }) => {
             </li>
         </ul>
     );
-
 
     const authLinks = (
         <ul>
@@ -42,7 +41,6 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading } }) => {
             </li>
         </ul>
     );
-
 
     return (
         <nav className="navbar bg-dark">

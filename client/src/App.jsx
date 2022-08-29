@@ -1,20 +1,23 @@
 import './App.css';
 import { Fragment, useEffect } from 'react';
-import Navbar from './components/layout/Navbar';
-import Landing from './components/layout/Landing';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Alert from './components/layout/Alert';
-import Dashboard from './components/dashboard/Dashboard';
-import ProfileForm from './components/profile-form/ProfileForm';
-import AddEducation from './components/profile-form/AddEducation';
-import AddExperience from './components/profile-form/AddExperience';
-import Profile from './components/profile/Profile';
-import Profiles from "./components/profiles/Profiles";
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/auth';
+import AddEducation from './components/profile-form/AddEducation';
+import AddExperience from './components/profile-form/AddExperience';
+import Alert from './components/layout/Alert';
+import Dashboard from './components/dashboard/Dashboard';
+import Landing from './components/layout/Landing';
+import Login from './components/auth/Login';
+import Navbar from './components/layout/Navbar';
+import NotFound from './components/layout/NotFound';
+import Post from './components/post/Post';
+import Posts from './components/posts/Posts';
 import PrivateRoute from './components/routing/PrivateRoute';
+import Profile from './components/profile/Profile';
+import ProfileForm from './components/profile-form/ProfileForm';
+import Profiles from './components/profiles/Profiles';
+import Register from './components/auth/Register';
 
 //redux
 import { Provider } from 'react-redux';
@@ -62,6 +65,15 @@ function App() {
                             path="add-education"
                             element={<PrivateRoute component={AddEducation} />}
                         />
+                        <Route
+                            path="posts"
+                            element={<PrivateRoute component={Posts} />}
+                        />
+                        <Route
+                            path="posts/:id"
+                            element={<PrivateRoute component={Post} />}
+                        />
+                        <Route path="/*" element={<NotFound />} />
                     </Routes>
                 </Fragment>
             </Router>

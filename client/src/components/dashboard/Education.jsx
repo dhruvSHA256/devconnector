@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteEducation } from '../../actions/profile';
@@ -43,7 +43,7 @@ const Education = ({ education, deleteEducation }) => {
 
 Education.propTypes = {
     education: PropTypes.array.isRequired,
-    deleteEducation: PropTypes.func.isRequired
+    deleteEducation: PropTypes.func.isRequired,
 };
 
 export default connect(null, { deleteEducation })(Education);

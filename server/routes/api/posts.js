@@ -50,6 +50,7 @@ router.delete('/comment/:post_id/:comment_id', auth, async (req, res) => {
         return res.status(500).send('Internal Server Error');
     }
 });
+
 //@route    PUT api/posts/comment/:post_id
 //@desc     Add comment to a post
 //@access   private

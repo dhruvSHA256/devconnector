@@ -1,8 +1,8 @@
 import { Fragment, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types'
-import { login } from "../../actions/auth";
+import PropTypes from 'prop-types';
+import { login } from '../../actions/auth';
 
 // import axios from 'axios';
 
@@ -71,9 +71,9 @@ const Login = ({ login, isAuthenticated }) => {
 Login.propTypes = {
     login: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
-}
+};
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
-})
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+});
 export default connect(mapStateToProps, { login })(Login);
